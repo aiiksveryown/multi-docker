@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t aiiksveryown/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t aiiks/react-test -f ./client/Dockerfile.dev ./client
 
 script: 
-  - docker run aiiksveryown/react-test npm test -- --coverage
+  - docker run aiiks/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t aiiksveryown/multi-client ./client
-  - docker build -t aiiksveryown/multi-nginx ./nginx
-  - docker build -t aiiksveryown/multi-server ./server
-  - docker build -t aiiksveryown/multi-worker ./worker
+  - docker build -t aiiks/multi-client ./client
+  - docker build -t aiiks/multi-nginx ./nginx
+  - docker build -t aiiks/multi-server ./server
+  - docker build -t aiiks/multi-worker ./worker
   # Log in to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push aiiksveryown/multi-client
-  - docker push aiiksveryown/multi-nginx
-  - docker push aiiksveryown/multi-server
-  - docker push aiiksveryown/multi-worker
+  - docker push aiiks/multi-client
+  - docker push aiiks/multi-nginx
+  - docker push aiiks/multi-server
+  - docker push aiiks/multi-worker
